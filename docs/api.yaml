@@ -1,0 +1,317 @@
+openapi: 3.0.1
+info:
+  title: TryDome API
+  description: API for TryDome template discovery and installation.
+  version: '1.0'
+servers:
+  - url: https://api.staging.trydome.io/api/v1
+    description: Staging server
+paths:
+  /templates/discovery/install:
+    post:
+      summary: Install a template discovery
+      description: Endpoint to install a template discovery.
+      operationId: installTemplateDiscovery
+      tags:
+        - Templates
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                organization:
+                  type: string
+                  example: ""
+                destination:
+                  type: string
+                  example: "Jasmine Blog"
+                isPrivate:
+                  type: boolean
+                  example: true
+                discovery:
+                  type: object
+                  properties:
+                    idea:
+                      type: object
+                      properties:
+                        productIdea:
+                          type: string
+                          example: "Build Personal Blog"
+                        productName:
+                          type: string
+                          example: "Jasmine"
+                        industry:
+                          type: string
+                          example: ""
+                        brandVoice:
+                          type: string
+                          example: "share!"
+                        colorDescription:
+                          type: string
+                          example: "warm"
+                        painPoint:
+                          type: string
+                          example: ""
+                        outcome:
+                          type: string
+                          example: ""
+                    settings:
+                      type: object
+                      properties:
+                        authSettings:
+                          type: object
+                          properties:
+                            isSelected:
+                              type: boolean
+                              example: true
+                            solution:
+                              type: string
+                              example: "emailAuth"
+                              enum:
+                                - emailAuth
+                        databaseSettings:
+                          type: object
+                          properties:
+                            isSelected:
+                              type: boolean
+                              example: true
+                            type:
+                              type: string
+                              example: "postgres"
+                              enum:
+                                - postgres
+                        paymentSettings:
+                          type: object
+                          properties:
+                            isSelected:
+                              type: boolean
+                              example: true
+                            solution:
+                              type: string
+                              example: "stripe"
+                            plan:
+                              type: string
+                              example: "oneTime"
+                              enum:
+                                - oneTime
+                                - subscription
+                        selectedTitle:
+                          type: object
+                          properties:
+                            title:
+                              type: string
+                              example: "Share Your Story with the World"
+                            subtitle:
+                              type: string
+                              example: "Craft your own personal blog and let your voice be heard loud and clear"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Template installed successfully"
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      security:
+        - jwt: []
+      x-codegen-request-body-name: body
+
+  /templates/discovery/deploy:
+    post:
+      summary: Deploy a template discovery
+      description: Endpoint to deploy a template discovery.
+      operationId: deployTemplateDiscovery
+      tags:
+        - Templates
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                projectId:
+                  type: string
+                  example: "5918273"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Template deployed successfully"
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      security:
+        - jwt: []
+      x-codegen-request-body-name: body
+
+  /templates/discovery/title:
+    post:
+      summary: Set the title for a template discovery
+      description: Endpoint to set the title for a template discovery.
+      operationId: setTitleTemplateDiscovery
+      tags:
+        - Templates
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                productIdea:
+                  type: string
+                  example: "I want to build a personal blog"
+                productName:
+                  type: string
+                  example: ""
+                industry:
+                  type: string
+                  example: "personal blog"
+                brandVoice:
+                  type: string
+                  example: "share!"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Title set successfully"
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      security:
+        - jwt: []
+      x-codegen-request-body-name: body
+
+  /templates/discovery/color:
+    post:
+      summary: Set the color for a template discovery
+      description: Endpoint to set the color for a template discovery.
+      operationId: setColorTemplateDiscovery
+      tags:
+        - Templates
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                productIdea:
+                  type: string
+                  example: "I want to build a personal blog"
+                productName:
+                  type: string
+                  example: ""
+                industry:
+                  type: string
+                  example: "personal blog"
+                brandVoice:
+                  type: string
+                  example: "share!"
+                colorDescription:
+                  type: string
+                  example: "warm"
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Color set successfully"
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      security:
+        - jwt: []
+      x-codegen-request-body-name: body
+
+components:
+  securitySchemes:
+    jwt:
+      type: apiKey
+      name: jwt
+      in: cookie
+  schemas:
+    Discovery:
+      type: object
+      properties:
+        idea:
+          type: object
+          properties:
+            productIdea:
+              type: string
+            productName:
+              type: string
+            industry:
+              type: string
+            brandVoice:
+              type: string
+            colorDescription:
+              type: string
+            painPoint:
+              type: string
+            outcome:
+              type: string
+        settings:
+          type: object
+          properties:
+            authSettings:
+              type: object
+              properties:
+                isSelected:
+                  type: boolean
+                solution:
+                  type: string
+            paymentSettings:
+              type: object
+              properties:
+                isSelected:
+                  type: boolean
+                solution:
+                  type: string
+                plan:
+                  type: string
+            selectedTitle:
+              type: object
+              properties:
+                title:
+                  type: string
+                subtitle:
+                  type: string
