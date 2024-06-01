@@ -60,7 +60,7 @@ paths:
                     settings:
                       type: object
                       properties:
-                        authSettings:
+                        auth:
                           type: object
                           properties:
                             isSelected:
@@ -71,7 +71,7 @@ paths:
                               example: "emailAuth"
                               enum:
                                 - emailAuth
-                        databaseSettings:
+                        database:
                           type: object
                           properties:
                             isSelected:
@@ -82,7 +82,7 @@ paths:
                               example: "postgres"
                               enum:
                                 - postgres
-                        paymentSettings:
+                        payment:
                           type: object
                           properties:
                             isSelected:
@@ -167,8 +167,8 @@ paths:
 
   /templates/discovery/title:
     post:
-      summary: Set the title for a template discovery
-      description: Endpoint to set the title for a template discovery.
+      summary: generate title for a template discovery
+      description: Endpoint to generate title for a template discovery.
       operationId: setTitleTemplateDiscovery
       tags:
         - Templates
@@ -214,8 +214,8 @@ paths:
 
   /templates/discovery/color:
     post:
-      summary: Set the color for a template discovery
-      description: Endpoint to set the color for a template discovery.
+      summary: generate color for a template discovery
+      description: Endpoint to generate color for a template discovery.
       operationId: setColorTemplateDiscovery
       tags:
         - Templates
@@ -292,14 +292,14 @@ components:
         settings:
           type: object
           properties:
-            authSettings:
+            auth:
               type: object
               properties:
                 isSelected:
                   type: boolean
                 solution:
                   type: string
-            paymentSettings:
+            payment:
               type: object
               properties:
                 isSelected:
