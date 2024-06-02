@@ -167,7 +167,7 @@ paths:
 
   /templates/discovery/title:
     post:
-      summary: generate title for a template discovery
+      summary: Generate title for a template discovery
       description: Endpoint to generate title for a template discovery.
       operationId: setTitleTemplateDiscovery
       tags:
@@ -214,7 +214,7 @@ paths:
 
   /templates/discovery/color:
     post:
-      summary: generate color for a template discovery
+      summary: Generate color for a template discovery
       description: Endpoint to generate color for a template discovery.
       operationId: setColorTemplateDiscovery
       tags:
@@ -263,6 +263,8 @@ paths:
       x-codegen-request-body-name: body
   /templates/discovery/download:
     post:
+      tags:
+        - Templates
       summary: Download Discovery Template
       description: Download a discovery template
       operationId: downloadDiscoveryTemplate
