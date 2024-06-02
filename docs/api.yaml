@@ -261,7 +261,214 @@ paths:
       security:
         - jwt: []
       x-codegen-request-body-name: body
-
+  /templates/discovery/download:
+    post:
+      summary: Download Discovery Template
+      description: Download a discovery template
+      operationId: downloadDiscoveryTemplate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                organization:
+                  type: string
+                destination:
+                  type: string
+                  example: Jasmine Blog
+                isPrivate:
+                  type: boolean
+                  example: true
+                discovery:
+                  type: object
+                  properties:
+                    idea:
+                      type: object
+                      properties:
+                        productIdea:
+                          type: string
+                          example: Build Personal Blog
+                        productName:
+                          type: string
+                          example: Jasmine
+                        industry:
+                          type: string
+                        brandVoice:
+                          type: string
+                          example: share!
+                        colorDescription:
+                          type: string
+                          example: warm
+                        painPoint:
+                          type: string
+                        outcome:
+                          type: string
+                    settings:
+                      type: object
+                      properties:
+                        auth:
+                          type: object
+                          properties:
+                            isSelected:
+                              type: boolean
+                              example: true
+                            solution:
+                              type: string
+                              example: emailAuth
+                        database:
+                          type: object
+                          properties:
+                            isSelected:
+                              type: boolean
+                              example: true
+                            type:
+                              type: string
+                              example: postgres
+                        payment:
+                          type: object
+                          properties:
+                            isSelected:
+                              type: boolean
+                              example: true
+                            solution:
+                              type: string
+                              example: stripe
+                            plan:
+                              type: string
+                              example: oneTime
+                        selectedTitle:
+                          type: object
+                          properties:
+                            title:
+                              type: string
+                              example: Share Your Story with the World
+                            subtitle:
+                              type: string
+                              example: Craft your own personal blog and let your voice be heard loud and clear
+      parameters:
+        - name: Content-Type
+          in: header
+          required: true
+          schema:
+            type: string
+            example: application/json
+        - name: accept
+          in: header
+          required: true
+          schema:
+            type: string
+            example: application/json, text/plain, */*
+        - name: accept-language
+          in: header
+          required: true
+          schema:
+            type: string
+            example: en-US,en;q=0.9
+        - name: cookie
+          in: header
+          required: true
+          schema:
+            type: string
+            example: jwt=eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIyODI3MDQ2NjAiLCJleHAiOjE3MTc0MTk5MDB9.r_ZqMQdHdAr1e00TDD_J6SUvW2_R8jql7pl1VG0yrlwVE6lia3Afw53HyBo3axASL12Xm5EJX2HKG9mBxnVrJw
+        - name: origin
+          in: header
+          required: true
+          schema:
+            type: string
+            example: https://app.staging.trydome.io
+        - name: priority
+          in: header
+          required: true
+          schema:
+            type: string
+            example: u=1, i
+        - name: referer
+          in: header
+          required: true
+          schema:
+            type: string
+            example: https://app.staging.trydome.io/
+        - name: sec-ch-ua
+          in: header
+          required: true
+          schema:
+            type: string
+            example: '"Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"'
+        - name: sec-ch-ua-mobile
+          in: header
+          required: true
+          schema:
+            type: string
+            example: ?0
+        - name: sec-ch-ua-platform
+          in: header
+          required: true
+          schema:
+            type: string
+            example: macOS
+        - name: sec-fetch-dest
+          in: header
+          required: true
+          schema:
+            type: string
+            example: empty
+        - name: sec-fetch-mode
+          in: header
+          required: true
+          schema:
+            type: string
+            example: cors
+        - name: sec-fetch-site
+          in: header
+          required: true
+          schema:
+            type: string
+            example: same-site
+        - name: user-agent
+          in: header
+          required: true
+          schema:
+            type: string
+            example: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
 components:
   securitySchemes:
     jwt:
