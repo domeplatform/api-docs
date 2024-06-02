@@ -191,7 +191,7 @@ paths:
     post:
       summary: Download Discovery Template
       tags:
-        - Tempaltes
+        - Templates
       description: Downloads a discovery template based on the provided settings.
       requestBody:
         required: true
