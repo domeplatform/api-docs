@@ -40,9 +40,12 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
+                  backendRepoId:
                     type: string
-                    example: "Template installed successfully"
+                    example: "960883425"
+                  frontendRepoId:
+                    type: string
+                    example: "960883426"
         '400':
           description: Bad request
         '401':
@@ -50,7 +53,7 @@ paths:
         '500':
           description: Internal server error
       security:
-        - jwt: []
+        - jwt: [ ]
       x-codegen-request-body-name: body
 
   /templates/discovery/deploy:
@@ -88,7 +91,7 @@ paths:
         '500':
           description: Internal server error
       security:
-        - jwt: []
+        - jwt: [ ]
       x-codegen-request-body-name: body
 
   /templates/discovery/title:
@@ -125,9 +128,12 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
+                  title:
                     type: string
-                    example: "Title set successfully"
+                    example: "Share Your Story with the World"
+                  subtitle:
+                    type: string
+                    example: "Craft your own personal blog and let your voice be heard loud and clear"
         '400':
           description: Bad request
         '401':
@@ -135,7 +141,7 @@ paths:
         '500':
           description: Internal server error
       security:
-        - jwt: []
+        - jwt: [ ]
       x-codegen-request-body-name: body
 
   /templates/discovery/color:
@@ -175,9 +181,24 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
-                    type: string
-                    example: "Color set successfully"
+                  primaryColor:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: "Vibrant Red Orange"
+                      hexCode:
+                        type: string
+                        example: "#FF5733"
+                  secondaryColor:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: "Cool Teal"
+                      hexCode:
+                        type: string
+                        example: "#33FFD6"
         '400':
           description: Bad request
         '401':
@@ -185,7 +206,7 @@ paths:
         '500':
           description: Internal server error
       security:
-        - jwt: []
+        - jwt: [ ]
       x-codegen-request-body-name: body
   /api/v1/templates/discovery/download:
     post:
@@ -203,13 +224,10 @@ paths:
         '200':
           description: Successful response
           content:
-            application/json:
+            application/zip:
               schema:
-                type: object
-                properties:
-                  success:
-                    type: boolean
-                    example: true
+                type: string
+                format: binary
         '400':
           description: Bad request
         '500':
