@@ -30,101 +30,6 @@ paths:
                 isPrivate:
                   type: boolean
                   example: true
-                discovery:
-                  type: object
-                  properties:
-                    idea:
-                      type: object
-                      properties:
-                        productIdea:
-                          type: string
-                          example: "Build Personal Blog"
-                        productName:
-                          type: string
-                          example: "Jasmine"
-                        industry:
-                          type: string
-                          example: ""
-                        brandVoice:
-                          type: string
-                          example: "share!"
-                        colorDescription:
-                          type: string
-                          example: "warm"
-                        painPoint:
-                          type: string
-                          example: ""
-                        outcome:
-                          type: string
-                          example: ""
-                    settings:
-                      type: object
-                      properties:
-                        auth:
-                          type: object
-                          properties:
-                            isSelected:
-                              type: boolean
-                              example: true
-                            solution:
-                              type: string
-                              example: "emailAuth"
-                              enum:
-                                - emailAuth
-                        database:
-                          type: object
-                          properties:
-                            isSelected:
-                              type: boolean
-                              example: true
-                            type:
-                              type: string
-                              example: "postgres"
-                              enum:
-                                - postgres
-                        payment:
-                          type: object
-                          properties:
-                            isSelected:
-                              type: boolean
-                              example: true
-                            solution:
-                              type: string
-                              example: "stripe"
-                            plan:
-                              type: string
-                              example: "oneTime"
-                              enum:
-                                - oneTime
-                                - subscription
-                        selectedTitle:
-                          type: object
-                          properties:
-                            title:
-                              type: string
-                              example: "Share Your Story with the World"
-                            subtitle:
-                              type: string
-                              example: "Craft your own personal blog and let your voice be heard loud and clear"
-                        colorSettings:
-                          type: object
-                          properties:
-                            primaryColor:
-                              type: string
-                            secondaryColor:
-                              type: string
-                        selectedFont:
-                          type: string
-                          example: "Inconsolata"
-                        selectedTheme:
-                          type: string
-                          example: "dark"
-                        components:
-                          type: array
-                          properties:
-                            id:
-                              type: string
-                              example: "BannerWithButton"
       responses:
         '200':
           description: Successful operation
@@ -133,9 +38,12 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
+                  backendRepoId:
                     type: string
-                    example: "Template installed successfully"
+                    example: "571890287"
+                  frontendRepoId:
+                    type: string
+                    example: "679128352"
         '400':
           description: Bad request
         '401':
@@ -163,12 +71,6 @@ paths:
                 projectId:
                   type: string
                   example: "5918273"
-                backendRepoId:
-                  type: string
-                  example: "57102983"
-                frontendRepoId:
-                  type: string
-                  example: "760192835"
       responses:
         '200':
           description: Successful operation
@@ -179,10 +81,13 @@ paths:
                 properties:
                   backendServiceId:
                     type: string
-                    example: "78276512"
+                    example: "579301411"
                   frontendServiceId:
                     type: string
-                    example: "666856120"
+                    example: "7501092835"
+                  databaseId:
+                    type: string
+                    example: "5617891982"
         '400':
           description: Bad request
         '401':
@@ -227,9 +132,12 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
+                  title:
                     type: string
-                    example: "Title set successfully"
+                    example: "Try Dome"
+                  subtitle:
+                    type: string
+                    example: "Launch Your SaaS. Unlock Your Freedom!"
         '400':
           description: Bad request
         '401':
@@ -277,9 +185,24 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
-                    type: string
-                    example: "Color set successfully"
+                  primaryColor:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: "indigo"
+                      hexCode:
+                        type: string
+                        example: "#6366f1"
+                  secondaryColor:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: "rose"
+                      hexCode:
+                        type: string
+                        example: "#f43f5e"
         '400':
           description: Bad request
         '401':
@@ -311,73 +234,6 @@ paths:
                 isPrivate:
                   type: boolean
                   example: true
-                discovery:
-                  type: object
-                  properties:
-                    idea:
-                      type: object
-                      properties:
-                        productIdea:
-                          type: string
-                          example: Build Personal Blog
-                        productName:
-                          type: string
-                          example: Jasmine
-                        industry:
-                          type: string
-                        brandVoice:
-                          type: string
-                          example: share!
-                        colorDescription:
-                          type: string
-                          example: warm
-                        painPoint:
-                          type: string
-                        outcome:
-                          type: string
-                    settings:
-                      type: object
-                      properties:
-                        auth:
-                          type: object
-                          properties:
-                            isSelected:
-                              type: boolean
-                              example: true
-                            solution:
-                              type: string
-                              example: emailAuth
-                        database:
-                          type: object
-                          properties:
-                            isSelected:
-                              type: boolean
-                              example: true
-                            type:
-                              type: string
-                              example: postgres
-                        payment:
-                          type: object
-                          properties:
-                            isSelected:
-                              type: boolean
-                              example: true
-                            solution:
-                              type: string
-                              example: stripe
-                            plan:
-                              type: string
-                              example: oneTime
-                        selectedTitle:
-                          type: object
-                          properties:
-                            title:
-                              type: string
-                              example: Share Your Story with the World
-                            subtitle:
-                              type: string
-                              example: Craft your own personal blog and let your voice be heard loud and clear
-
       parameters:
         - name: Content-Type
           in: header
@@ -464,15 +320,13 @@ paths:
             type: string
             example: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
       responses:
-        '201':
-          description: Created
+        '200':
+          description: Provided zipped source code
           content:
-            application/json:
+            application/zip:
               schema:
-                type: object
-                properties:
-                  message:
-                    type: string
+                type: string
+                format: binary
         '400':
           description: Bad Request
           content:
