@@ -31,7 +31,100 @@ paths:
                   type: boolean
                   example: true
                 discovery:
-                  $ref: "#/components/schemas/Discovery"
+                  type: object
+                  properties:
+                    idea:
+                      type: object
+                      properties:
+                        productIdea:
+                          type: string
+                          example: "Build Personal Blog"
+                        productName:
+                          type: string
+                          example: "Jasmine"
+                        industry:
+                          type: string
+                          example: ""
+                        brandVoice:
+                          type: string
+                          example: "share!"
+                        colorDescription:
+                          type: string
+                          example: "warm"
+                        painPoint:
+                          type: string
+                          example: ""
+                        outcome:
+                          type: string
+                          example: ""
+                    settings:
+                      type: object
+                      properties:
+                        auth:
+                          type: object
+                          properties:
+                            isSelected:
+                              type: boolean
+                              example: true
+                            solution:
+                              type: string
+                              example: "emailAuth"
+                              enum:
+                                - emailAuth
+                        database:
+                          type: object
+                          properties:
+                            isSelected:
+                              type: boolean
+                              example: true
+                            type:
+                              type: string
+                              example: "postgres"
+                              enum:
+                                - postgres
+                        payment:
+                          type: object
+                          properties:
+                            isSelected:
+                              type: boolean
+                              example: true
+                            solution:
+                              type: string
+                              example: "stripe"
+                            plan:
+                              type: string
+                              example: "oneTime"
+                              enum:
+                                - oneTime
+                                - subscription
+                        selectedTitle:
+                          type: object
+                          properties:
+                            title:
+                              type: string
+                              example: "Share Your Story with the World"
+                            subtitle:
+                              type: string
+                              example: "Craft your own personal blog and let your voice be heard loud and clear"
+                        colorSettings:
+                          type: object
+                          properties:
+                            primaryColor:
+                              type: string
+                            secondaryColor:
+                              type: string
+                        selectedFont:
+                          type: string
+                          example: "Inconsolata"
+                        selectedTheme:
+                          type: string
+                          example: "dark"
+                        components:
+                          type: array
+                          properties:
+                            id:
+                              type: string
+                              example: "BannerWithButton"
       responses:
         '200':
           description: Successful operation
@@ -40,12 +133,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  backendRepoId:
+                  message:
                     type: string
-                    example: "960883425"
-                  frontendRepoId:
-                    type: string
-                    example: "960883426"
+                    example: "Template installed successfully"
         '400':
           description: Bad request
         '401':
@@ -53,7 +143,7 @@ paths:
         '500':
           description: Internal server error
       security:
-        - jwt: [ ]
+        - jwt: []
       x-codegen-request-body-name: body
 
   /templates/discovery/deploy:
@@ -73,6 +163,12 @@ paths:
                 projectId:
                   type: string
                   example: "5918273"
+                backendRepoId:
+                  type: string
+                  example: "57102983"
+                frontendRepoId:
+                  type: string
+                  example: "760192835"
       responses:
         '200':
           description: Successful operation
@@ -81,9 +177,12 @@ paths:
               schema:
                 type: object
                 properties:
-                  message:
+                  backendServiceId:
                     type: string
-                    example: "Template deployed successfully"
+                    example: "78276512"
+                  frontendServiceId:
+                    type: string
+                    example: "666856120"
         '400':
           description: Bad request
         '401':
@@ -91,7 +190,7 @@ paths:
         '500':
           description: Internal server error
       security:
-        - jwt: [ ]
+        - jwt: []
       x-codegen-request-body-name: body
 
   /templates/discovery/title:
@@ -128,12 +227,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  title:
+                  message:
                     type: string
-                    example: "Share Your Story with the World"
-                  subtitle:
-                    type: string
-                    example: "Craft your own personal blog and let your voice be heard loud and clear"
+                    example: "Title set successfully"
         '400':
           description: Bad request
         '401':
@@ -141,7 +237,7 @@ paths:
         '500':
           description: Internal server error
       security:
-        - jwt: [ ]
+        - jwt: []
       x-codegen-request-body-name: body
 
   /templates/discovery/color:
@@ -181,24 +277,9 @@ paths:
               schema:
                 type: object
                 properties:
-                  primaryColor:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                        example: "Vibrant Red Orange"
-                      hexCode:
-                        type: string
-                        example: "#FF5733"
-                  secondaryColor:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                        example: "Cool Teal"
-                      hexCode:
-                        type: string
-                        example: "#33FFD6"
+                  message:
+                    type: string
+                    example: "Color set successfully"
         '400':
           description: Bad request
         '401':
@@ -206,45 +287,226 @@ paths:
         '500':
           description: Internal server error
       security:
-        - jwt: [ ]
+        - jwt: []
       x-codegen-request-body-name: body
-  /api/v1/templates/discovery/download:
+  /templates/discovery/download:
     post:
-      summary: Download Discovery Template
       tags:
         - Templates
-      description: Downloads a discovery template based on the provided settings.
+      summary: Download Discovery Template
+      description: Download a discovery template
+      operationId: downloadDiscoveryTemplate
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/DiscoveryRequest'
+              type: object
+              properties:
+                organization:
+                  type: string
+                destination:
+                  type: string
+                  example: Jasmine Blog
+                isPrivate:
+                  type: boolean
+                  example: true
+                discovery:
+                  type: object
+                  properties:
+                    idea:
+                      type: object
+                      properties:
+                        productIdea:
+                          type: string
+                          example: Build Personal Blog
+                        productName:
+                          type: string
+                          example: Jasmine
+                        industry:
+                          type: string
+                        brandVoice:
+                          type: string
+                          example: share!
+                        colorDescription:
+                          type: string
+                          example: warm
+                        painPoint:
+                          type: string
+                        outcome:
+                          type: string
+                    settings:
+                      type: object
+                      properties:
+                        auth:
+                          type: object
+                          properties:
+                            isSelected:
+                              type: boolean
+                              example: true
+                            solution:
+                              type: string
+                              example: emailAuth
+                        database:
+                          type: object
+                          properties:
+                            isSelected:
+                              type: boolean
+                              example: true
+                            type:
+                              type: string
+                              example: postgres
+                        payment:
+                          type: object
+                          properties:
+                            isSelected:
+                              type: boolean
+                              example: true
+                            solution:
+                              type: string
+                              example: stripe
+                            plan:
+                              type: string
+                              example: oneTime
+                        selectedTitle:
+                          type: object
+                          properties:
+                            title:
+                              type: string
+                              example: Share Your Story with the World
+                            subtitle:
+                              type: string
+                              example: Craft your own personal blog and let your voice be heard loud and clear
+
+      parameters:
+        - name: Content-Type
+          in: header
+          required: true
+          schema:
+            type: string
+            example: application/json
+        - name: accept
+          in: header
+          required: true
+          schema:
+            type: string
+            example: application/json, text/plain, */*
+        - name: accept-language
+          in: header
+          required: true
+          schema:
+            type: string
+            example: en-US,en;q=0.9
+        - name: cookie
+          in: header
+          required: true
+          schema:
+            type: string
+            example: jwt=eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiIyODI3MDQ2NjAiLCJleHAiOjE3MTc0MTk5MDB9.r_ZqMQdHdAr1e00TDD_J6SUvW2_R8jql7pl1VG0yrlwVE6lia3Afw53HyBo3axASL12Xm5EJX2HKG9mBxnVrJw
+        - name: origin
+          in: header
+          required: true
+          schema:
+            type: string
+            example: https://app.staging.trydome.io
+        - name: priority
+          in: header
+          required: true
+          schema:
+            type: string
+            example: u=1, i
+        - name: referer
+          in: header
+          required: true
+          schema:
+            type: string
+            example: https://app.staging.trydome.io/
+        - name: sec-ch-ua
+          in: header
+          required: true
+          schema:
+            type: string
+            example: '"Chromium";v="124", "Google Chrome";v="124", "Not-A.Brand";v="99"'
+        - name: sec-ch-ua-mobile
+          in: header
+          required: true
+          schema:
+            type: string
+            example: ?0
+        - name: sec-ch-ua-platform
+          in: header
+          required: true
+          schema:
+            type: string
+            example: macOS
+        - name: sec-fetch-dest
+          in: header
+          required: true
+          schema:
+            type: string
+            example: empty
+        - name: sec-fetch-mode
+          in: header
+          required: true
+          schema:
+            type: string
+            example: cors
+        - name: sec-fetch-site
+          in: header
+          required: true
+          schema:
+            type: string
+            example: same-site
+        - name: user-agent
+          in: header
+          required: true
+          schema:
+            type: string
+            example: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36
       responses:
-        '200':
-          description: Successful response
+        '201':
+          description: Created
           content:
-            application/zip:
+            application/json:
               schema:
-                type: string
-                format: binary
+                type: object
+                properties:
+                  message:
+                    type: string
         '400':
-          description: Bad request
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
         '500':
-          description: Internal server error
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
 components:
+  securitySchemes:
+    jwt:
+      type: apiKey
+      name: jwt
+      in: cookie
   schemas:
-    DiscoveryRequest:
-      type: object
-      properties:
-        organization:
-          type: string
-        destination:
-          type: string
-        isPrivate:
-          type: boolean
-        discovery:
-          $ref: '#/components/schemas/Discovery'
     Discovery:
       type: object
       properties:
@@ -275,13 +537,6 @@ components:
                   type: boolean
                 solution:
                   type: string
-            database:
-              type: object
-              properties:
-                isSelected:
-                  type: boolean
-                type:
-                  type: string
             payment:
               type: object
               properties:
@@ -298,11 +553,22 @@ components:
                   type: string
                 subtitle:
                   type: string
+            colorSettings:
+              type: object
+              properties:
+                primaryColor:
+                  type: string
+                secondaryColor:
+                  type: string
+            selectedFont:
+              type: string
+              example: "Inconsolata"
+            selectedTheme:
+              type: string
+              example: "dark"
             components:
               type: array
-              items:
-                type: object
-                properties:
-                  id:
-                    type: string
-                    example: BannerWithButton
+              properties:
+                id:
+                  type: string
+                  example: "BannerWithButton"
